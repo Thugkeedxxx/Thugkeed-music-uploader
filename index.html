@@ -328,21 +328,21 @@ loader.style.display="none";
 <div class="grid">
 
 <div class="card">
-<h3>Street Dreams</h3>
+<h3>Dirty Sprite 💜🥤</h3>
 <p>ThugKeed</p>
-<button>Play</button>
+<button onclick="uploadSong()">Play Song</button>
 </div>
 
 <div class="card">
-<h3>Night Vibes</h3>
-<p>Young Pulse</p>
-<button>Play</button>
+<h3>Turn it Up</h3>
+<p>Parmalat_SA</p>
+<button onclick="Play()">Play Song</button>
 </div>
 
 <div class="card">
-<h3>City Lights</h3>
-<p>DJ Nova</p>
-<button>Play</button>
+<h3>Ngwana Modimo</h3>
+<p>Lord Kid</p>
+<button onclick="Play()">Play Song</button>
 </div>
 
 </div>
@@ -362,13 +362,13 @@ loader.style.display="none";
 
 <div class="artist">
 <div class="avatar"></div>
-<h3>Nova X</h3>
-<p>Afro Drill</p>
+<h3>LordKid</h3>
+<p>Afro Pop</p>
 </div>
 
 <div class="artist">
 <div class="avatar"></div>
-<h3>Luna V</h3>
+<h3>Parmalat SA</h3>
 <p>R&B / Soul</p>
 </div>
 
@@ -386,7 +386,7 @@ loader.style.display="none";
 
 <input type="file" accept="audio/*">
 
-<button>Upload Song</button>
+<button onclick="uploadSong()">Upload Song</button>
 
 </div>
 </section>
@@ -671,4 +671,42 @@ function closeLogin(){
 document.getElementById("login").style.display = "none";
 }
 
-</script>
+</script> src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+const SUPABASE_URL = "YOUR_PROJECT_URL_HERE";
+const SUPABASE_KEY = "YOUR_ANON_PUBLIC_KEY_HERE";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>async function uploadSong() {
+  const fileInput = document.querySelector('input[type="file"]');
+  const title = document.querySelectorAll('.upload-box input')[0].value;
+  const artist = document.querySelectorAll('.upload-box input')[1].value;
+
+  if (!fileInput.files[0]) {
+    alert("Select a song first");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const fileName = Date.now() + "-" + file.name;
+
+  const { data, error } = await supabaseClient
+    .storage
+    .from("music")
+    .upload(fileName, file);
+
+  if (error) {
+    alert("Upload failed");
+    return;
+  }
+
+  const url = supabaseClient
+    .storage
+    .from("music")
+    .getPublicUrl(fileName).data.publicUrl;
+
+  alert("Uploaded! 🎵\n" + url);
+
+  console.log("Song URL:", url);
+}
