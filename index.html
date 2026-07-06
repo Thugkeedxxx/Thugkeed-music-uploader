@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THUGKEED MUSIC UPLOADER</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#090011;
+color:white;
+overflow-x:hidden;
+}
+
+/* Animated Background */
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(-45deg,#5f00ff,#9400ff,#180026,#7b2fff);
+background-size:400% 400%;
+animation:bg 15s ease infinite;
+z-index:-2;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* Loader */
+
+#loader{
+position:fixed;
+width:100%;
+height:100vh;
+background:#090011;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+}
+
+.loader-circle{
+width:90px;
+height:90px;
+border:8px solid rgba(255,255,255,.2);
+border-top:8px solid #bb00ff;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+#loader h2{
+margin-top:20px;
+letter-spacing:3px;
+}
+
+/* Navbar */
+
+nav{
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+padding:15px 35px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-radius:60px;
+border:1px solid rgba(255,255,255,.15);
+z-index:99;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+color:#d96dff;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+nav a:hover{
+color:#d96dff;
+}
+
+/* Hero */
+
+.hero{
+
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+
+}
+
+.hero h1{
+
+font-size:65px;
+font-weight:800;
+background:linear-gradient(90deg,#fff,#d96dff,#8a2be2);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+.hero p{
+
+margin-top:20px;
+max-width:700px;
+line-height:1.8;
+color:#ddd;
+
+}
+
+.hero button{
+
+margin-top:35px;
+padding:18px 50px;
+border:none;
+border-radius:50px;
+font-size:18px;
+cursor:pointer;
+background:#8a2be2;
+color:white;
+transition:.4s;
+
+}
+
+.hero button:hover{
+
+transform:scale(1.1);
+box-shadow:0 0 35px #8a2be2;
+
+}
+
+/* Search */
+
+.search{
+
+margin-top:40px;
+display:flex;
+width:700px;
+max-width:95%;
+
+}
+
+.search input{
+
+flex:1;
+padding:18px;
+border:none;
+border-radius:40px 0 0 40px;
+outline:none;
+font-size:17px;
+
+}
+
+.search button{
+
+padding:18px 30px;
+border:none;
+background:#8a2be2;
+color:white;
+border-radius:0 40px 40px 0;
+cursor:pointer;
+
+}
+
+/* Floating Music */
+
+.music{
+
+position:absolute;
+font-size:40px;
+animation:float 8s linear infinite;
+
+}
+
+.music:nth-child(1){
+left:10%;
+top:20%;
+}
+
+.music:nth-child(2){
+right:15%;
+top:35%;
+animation-duration:10s;
+}
+
+.music:nth-child(3){
+left:20%;
+bottom:15%;
+animation-duration:12s;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px) rotate(0deg);
+}
+
+50%{
+transform:translateY(-40px) rotate(180deg);
+}
+
+100%{
+transform:translateY(0px) rotate(360deg);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loader">
+
+<div class="loader-circle"></div>
+
+<h2>THUGKEED MUSIC</h2>
+
+</div>
+
+<nav>
+
+<div class="logo">TMU</div>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#">Trending</a></li>
+
+<li><a href="#">Artists</a></li>
+
+<li><a href="#">Upload</a></li>
+
+<li><a href="#">Login</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<div class="music">🎵</div>
+<div class="music">🎧</div>
+<div class="music">💜</div>
+
+<h1>Upload Your Music To The World</h1>
+
+<p>
+
+The home of upcoming artists.
+Upload your songs, build your fanbase,
+discover new talent and stream unlimited music.
+
+</p>
+
+<div class="search">
+
+<input type="text" placeholder="Search Songs, Albums, Artists...">
+
+<button>Search</button>
+
+</div>
+
+<button>Upload Now</button>
+
+</section>
+
+<script>
+
+setTimeout(()=>{
+
+loader.style.display="none";
+
+},2500);
+
+</script>
+
+</body>
+  </html><!-- TRENDING SECTION -->
+<section class="section">
+<h2 class="title">🔥 Trending Songs</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Street Dreams</h3>
+<p>ThugKeed</p>
+<button>Play</button>
+</div>
+
+<div class="card">
+<h3>Night Vibes</h3>
+<p>Young Pulse</p>
+<button>Play</button>
+</div>
+
+<div class="card">
+<h3>City Lights</h3>
+<p>DJ Nova</p>
+<button>Play</button>
+</div>
+
+</div>
+</section>
+
+<!-- ARTISTS SECTION -->
+<section class="section">
+<h2 class="title">🎤 Featured Artists</h2>
+
+<div class="grid">
+
+<div class="artist">
+<div class="avatar"></div>
+<h3>ThugKeed</h3>
+<p>Hip Hop / Trap</p>
+</div>
+
+<div class="artist">
+<div class="avatar"></div>
+<h3>Nova X</h3>
+<p>Afro Drill</p>
+</div>
+
+<div class="artist">
+<div class="avatar"></div>
+<h3>Luna V</h3>
+<p>R&B / Soul</p>
+</div>
+
+</div>
+</section>
+
+<!-- UPLOAD SECTION -->
+<section class="upload">
+<h2 class="title">⬆️ Upload Your Song</h2>
+
+<div class="upload-box">
+
+<input type="text" placeholder="Song Title">
+<input type="text" placeholder="Artist Name">
+
+<input type="file" accept="audio/*">
+
+<button>Upload Song</button>
+
+</div>
+</section>
+
+<!-- MINI MUSIC PLAYER -->
+<div class="player">
+
+<div class="info">
+<p id="song">No song playing</p>
+</div>
+
+<div class="controls">
+<button onclick="play()">▶</button>
+<button onclick="pause()">⏸</button>
+<button onclick="stop()">⏹</button>
+</div>
+
+</div>
+
+<style>
+
+/* SECTION STYLE */
+.section{
+padding:80px 20px;
+text-align:center;
+}
+
+.title{
+font-size:35px;
+margin-bottom:40px;
+color:#d96dff;
+}
+
+/* GRID */
+.grid{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:15px;
+width:200px;
+backdrop-filter:blur(15px);
+transition:.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #8a2be2;
+}
+
+.card button{
+margin-top:10px;
+padding:8px 20px;
+border:none;
+background:#8a2be2;
+color:white;
+border-radius:20px;
+cursor:pointer;
+}
+
+/* ARTIST */
+.artist{
+background:rgba(255,255,255,0.08);
+padding:20px;
+border-radius:15px;
+width:180px;
+backdrop-filter:blur(15px);
+}
+
+.avatar{
+width:70px;
+height:70px;
+background:#8a2be2;
+border-radius:50%;
+margin:0 auto 10px;
+}
+
+/* UPLOAD */
+.upload{
+padding:80px 20px;
+text-align:center;
+}
+
+.upload-box{
+display:flex;
+flex-direction:column;
+gap:15px;
+width:300px;
+margin:auto;
+}
+
+.upload-box input{
+padding:12px;
+border:none;
+border-radius:10px;
+outline:none;
+}
+
+.upload-box button{
+padding:12px;
+border:none;
+background:#8a2be2;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* PLAYER */
+.player{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+padding:15px 25px;
+border-radius:50px;
+display:flex;
+align-items:center;
+gap:20px;
+border:1px solid rgba(255,255,255,0.2);
+}
+
+.controls button{
+background:#8a2be2;
+border:none;
+padding:8px 12px;
+border-radius:50%;
+color:white;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+function play(){
+document.getElementById("song").innerText = "Playing: Demo Track 🔥";
+}
+
+function pause(){
+document.getElementById("song").innerText = "Paused ⏸";
+}
+
+function stop(){
+document.getElementById("song").innerText = "Stopped ⏹";
+}
+
+  </script><!-- LOGIN MODAL -->
+<div id="login" class="modal">
+
+<div class="modal-box">
+
+<h2>Login</h2>
+
+<input type="text" placeholder="Username">
+<input type="password" placeholder="Password">
+
+<button>Login</button>
+
+<p onclick="closeLogin()">Close</p>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+
+<h2>THUGKEED MUSIC UPLOADER</h2>
+
+<p>Upload. Stream. Get Heard Worldwide. 💜</p>
+
+<div class="socials">
+<span>🎵</span>
+<span>💜</span>
+<span>🔥</span>
+</div>
+
+<p class="copy">© 2026 THUGKEED TECH. All Rights Reserved.</p>
+
+</footer>
+
+<style>
+
+/* MODAL */
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+justify-content:center;
+align-items:center;
+}
+
+.modal-box{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:15px;
+width:300px;
+text-align:center;
+}
+
+.modal-box input{
+width:100%;
+margin:10px 0;
+padding:10px;
+border:none;
+border-radius:8px;
+}
+
+.modal-box button{
+padding:10px 20px;
+background:#8a2be2;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+padding:60px 20px;
+text-align:center;
+background:rgba(0,0,0,0.4);
+margin-top:80px;
+}
+
+footer h2{
+color:#d96dff;
+}
+
+.socials{
+margin:15px 0;
+font-size:25px;
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+.copy{
+opacity:0.6;
+font-size:14px;
+}
+
+/* SMOOTH ANIMATION */
+.section, .hero, .upload{
+animation:fade 1s ease;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+</style>
+
+<script>
+
+// LOADER FIX
+window.onload = function(){
+document.getElementById("loader").style.display = "none";
+}
+
+// LOGIN OPEN
+function openLogin(){
+document.getElementById("login").style.display = "flex";
+}
+
+// LOGIN CLOSE
+function closeLogin(){
+document.getElementById("login").style.display = "none";
+}
+
+</script>
