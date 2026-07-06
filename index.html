@@ -674,39 +674,8 @@ document.getElementById("login").style.display = "none";
 </script> src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script>
-const SUPABASE_URL = "YOUR_PROJECT_URL_HERE";
-const SUPABASE_KEY = "YOUR_ANON_PUBLIC_KEY_HERE";
+const SUPABASE_URL = "https://ulkqgbunvuykrddgpczn.supabase.co";
+const SUPABASE_KEY = "sb_publishable_bR6XEvkqbDw0XH-_lhUFIw_3mhjqu7o";
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-</script>async function uploadSong() {
-  const fileInput = document.querySelector('input[type="file"]');
-  const title = document.querySelectorAll('.upload-box input')[0].value;
-  const artist = document.querySelectorAll('.upload-box input')[1].value;
-
-  if (!fileInput.files[0]) {
-    alert("Select a song first");
-    return;
-  }
-
-  const file = fileInput.files[0];
-  const fileName = Date.now() + "-" + file.name;
-
-  const { data, error } = await supabaseClient
-    .storage
-    .from("music")
-    .upload(fileName, file);
-
-  if (error) {
-    alert("Upload failed");
-    return;
-  }
-
-  const url = supabaseClient
-    .storage
-    .from("music")
-    .getPublicUrl(fileName).data.publicUrl;
-
-  alert("Uploaded! 🎵\n" + url);
-
-  console.log("Song URL:", url);
-}
+</script>
